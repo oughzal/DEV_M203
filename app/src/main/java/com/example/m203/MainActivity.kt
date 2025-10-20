@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, carTypeList)
+        val adapter = ArrayAdapter<String>(this, R.layout.spinner_item, carTypeList)
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spTypeCar.adapter = adapter
