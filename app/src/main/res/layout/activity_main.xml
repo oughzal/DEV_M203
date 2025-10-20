@@ -3,13 +3,121 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:padding="45dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="45dp"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choisir une Date : " />
 
+    <DatePicker
+        android:id="@+id/dpDate"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content" />
+    <!--    android:datePickerMode="spinner"-->
+    <!--    android:calendarViewShown="false"-->
+    <!--    android:spinnersShown="true"-->
+
+    <RadioGroup
+        android:id="@+id/rgOperation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbPlus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="+" />
+
+        <RadioButton
+            android:id="@+id/rbMinus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/etYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:text="0" />
+
+
+        <EditText
+            android:id="@+id/etMonth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:text="0" />
+
+        <EditText
+            android:id="@+id/etWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:text="0" />
+
+        <EditText
+            android:id="@+id/etDay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:text="0" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCalculer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculer" />
+
+    <TextView
+        android:id="@+id/tvAgeInDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Age en jours : 0"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvAgeInWeeks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Age en Semaine : 0"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvDateAfterCalculation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Date après calcul : "
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
 
 </LinearLayout>
