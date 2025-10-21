@@ -7,9 +7,16 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
+interface OnPersonClickListener {
+    fun onPersonClick(position: Int)
+    fun onRemoveClick(position: Int)
+
+}
+
 class PersonAdaper(
     context : Context,
-    list : MutableList<Person>
+    list : MutableList<Person>,
+    private val listener: OnPersonClickListener
 ) : ArrayAdapter<Person>(context, 0, list) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = convertView ?: View.inflate(context, R.layout.person_item, null)
@@ -23,8 +30,7 @@ class PersonAdaper(
         tvage.text = person.age.toString()
 
         btnRemove.setOnClickListener {
-            list.removeAt(position)
-            this.notifyDataSetChanged()
+            listener.onRemoveClick(position)
         }
         // code to bind person data to view elements goes here
         return view
