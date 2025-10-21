@@ -19,5 +19,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val adapter : PersonAdaper = PersonAdaper(this, list)
+        binding.lvPersonnes.adapter = adapter
+
+        binding.btnAjouter.setOnClickListener {
+            val nom = binding.etNom.text.toString()
+            val prenom = binding.etPrenom.text.toString()
+            val age = binding.etAge.text.toString().toIntOrNull() ?: 0
+            val person = Person(nom, prenom, age)
+            list.add(person)
+            adapter.notifyDataSetChanged()
+        }
+
     }
 }
