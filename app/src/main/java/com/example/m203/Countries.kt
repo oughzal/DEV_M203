@@ -7,7 +7,7 @@ data class Country(
     val capital : String
 )
 
-val countries = listOf(
+val countries = mutableListOf(
     Country("aw","آروبا",R.drawable.aw,"أورانجستاد"),
     Country("az","أذربيجان",R.drawable.az,"باكو"),
     Country("am","أرمينيا",R.drawable.am,"يريفان"),
