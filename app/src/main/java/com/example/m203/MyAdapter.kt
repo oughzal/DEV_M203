@@ -31,7 +31,7 @@ class MyAdapter(
         val isWaterResistant = view.findViewById<Switch>(R.id.isWaterproof)
         image.setImageResource(smartwatch!!.image)
         name.text = smartwatch.name
-        price.text = "$${smartwatch.price}"k
+        price.text = "$${smartwatch.price}"
         isWaterResistant.isChecked = smartwatch.isWaterRisistant
 
         return view
