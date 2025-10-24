@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.M203" parent="Base.Theme.M203" />
+
+    <style name="ImageCircle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="borderWidth">10dp</item>
+
+    </style>
 </resources>

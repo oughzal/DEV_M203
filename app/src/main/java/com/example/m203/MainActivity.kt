@@ -19,5 +19,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val adapter : ConversationAdapter = ConversationAdapter(
+            this,
+            conversations
+        )
+        binding.lvConversations.adapter = adapter
+
     }
 }
