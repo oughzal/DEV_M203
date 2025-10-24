@@ -1,32 +1,35 @@
 package com.example.m203
 
-import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.m203.databinding.ConversationItemBinding
 
 class ConversationAdapter(
-    context: Context,
     conversations: List<Conversation>
-) : ArrayAdapter<Conversation>(context, 0, conversations) {
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: View.inflate(context, R.layout.conversation_item, null)
-        val conversation = conversations[position]
-
-        val profileImage = view.findViewById<ImageView>(R.id.profileImage)
-        val name = view.findViewById<TextView>(R.id.name)
-        val hour = view.findViewById<TextView>(R.id.time)
-        val lastMessage = view.findViewById<TextView>(R.id.message)
-        val isOnline = view.findViewById<View>(R.id.isOnline)
-
-        profileImage.setImageResource(conversation.profileImage)
-        name.text = conversation.name
-        hour.text = conversation.hour
-        lastMessage.text = conversation.lastMessage
-        isOnline.visibility = if (conversation.isOnline) View.VISIBLE else View.GONE
-
-        return view
+) : RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.conversation_item, parent, false)
+        return ConversationViewHolder(view)
     }
+    override fun onBindViewHolder(holder: ConversationViewHolder, position: Int) {
+        holder.bind(conversations[position])
+    }
+    override fun getItemCount(): Int = conversations.size
+
+    inner class ConversationViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+        val binding = ConversationItemBinding.bind(itemView)
+        fun bind(conversation: Conversation) {
+            // Bind conversation data to UI elements
+            binding.profileImage.setImageResource(conversation.profileImage)
+            binding.name.text = conversation.name
+            binding.message.text = conversation.lastMessage
+            binding.time.text = conversation.hour
+            binding.isOnline.visibility = if (conversation.isOnline) View.VISIBLE else View.GONE
+
+        }
+    }
+
 }
