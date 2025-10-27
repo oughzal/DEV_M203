@@ -10,9 +10,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.m203.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), CountryEventListener {
+class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
     lateinit var countryAdapter: CountryAdapter
@@ -20,20 +22,11 @@ class MainActivity : AppCompatActivity(), CountryEventListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        countryAdapter = CountryAdapter(this, countries,this)
-        binding.lvCountries.adapter = countryAdapter
-//        binding.lvCountries.setOnItemClickListener { _, _, position, _ ->
-//            val country = countries[position]
-//            binding.flag.setImageResource(country.imageId)
-//            binding.countryName.text = "${country.name} (${country.capital})"
-//
-//        }
-    }
 
-    override fun onFlagClicked(position: Int) {
-        val country = countries[position]
-        binding.flag.setImageResource(country.imageId)
-        binding.countryName.text = "${country.name} (${country.capital})"
+        val adapter = CountryAdapter(countries)
+        binding.rvCountries.layoutManager = GridLayoutManager(this, 3)
+        binding.rvCountries.adapter = adapter
+
     }
 
 

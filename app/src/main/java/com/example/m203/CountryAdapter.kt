@@ -8,33 +8,37 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 
 interface CountryEventListener {
     fun onFlagClicked(position: Int)
 }
 
-class CountryAdapter(
-    context : Context,
-    coutries : MutableList<Country>,
-    val listener: CountryEventListener
-) : ArrayAdapter<Country>(context, 0, coutries) {
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = convertView ?: LayoutInflater.from(context).inflate(
-            R.layout.country_item,
-            parent,
-            false
-        )
-        val country = countries[position]
-        val flag = view.findViewById<ImageView>(R.id.imgFlag)
-        val name = view.findViewById<TextView>(R.id.countryName)
-        val capital = view.findViewById<TextView>(R.id.countryCapital)
-        flag.setImageResource(country.imageId)
+class CountryAdapter(private val itemList : List<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): CountryViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.country_item, parent, false)
+        return CountryViewHolder(view)
+    }
 
-        name.text = country.name
-        capital.text = country.capital
-        flag.setOnClickListener {
-            listener.onFlagClicked(position)
-        }
-        return view
+    override fun onBindViewHolder(
+        holder: CountryViewHolder,
+        position: Int
+    ) {
+        val country = itemList[position]
+        holder.imageFlag.setImageResource(country.imageId)
+        holder.name.text = country.name
+        holder.capital.text = country.capital
+    }
+
+    override fun getItemCount(): Int = itemList.size
+
+
+    class CountryViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
+        val imageFlag = itemView.findViewById<ImageView>(R.id.imgFlag)
+        val name = itemView.findViewById<TextView>(R.id.countryName)
+        val capital = itemView.findViewById<TextView>(R.id.countryCapital)
     }
 }

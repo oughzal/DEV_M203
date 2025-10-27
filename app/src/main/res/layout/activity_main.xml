@@ -9,29 +9,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/flag"
-        android:src="@drawable/ma" />
-    <TextView
-        android:id="@+id/countryName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Marocco (Rabat)"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp"
-
-        />
-
-<ListView
+<androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:listitem="@layout/country_item"
     android:layout_weight="1"
-    android:id="@+id/lvCountries"/>
+    app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+    tools:listitem="@layout/country_item"
+
+    android:id="@+id/rvCountries"/>
 
 
 </LinearLayout>
