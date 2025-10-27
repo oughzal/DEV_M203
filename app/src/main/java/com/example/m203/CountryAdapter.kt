@@ -28,17 +28,22 @@ class CountryAdapter(private val itemList : List<Country>) : RecyclerView.Adapte
         position: Int
     ) {
         val country = itemList[position]
-        holder.imageFlag.setImageResource(country.imageId)
-        holder.name.text = country.name
-        holder.capital.text = country.capital
+        holder.bind(country)
     }
 
     override fun getItemCount(): Int = itemList.size
 
 
-    class CountryViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
+    inner class CountryViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
         val imageFlag = itemView.findViewById<ImageView>(R.id.imgFlag)
         val name = itemView.findViewById<TextView>(R.id.countryName)
         val capital = itemView.findViewById<TextView>(R.id.countryCapital)
+
+        fun bind(country: Country) {
+            imageFlag.setImageResource(country.imageId)
+            name.text = country.name
+            capital.text = country.capital
+        }
+
     }
 }
