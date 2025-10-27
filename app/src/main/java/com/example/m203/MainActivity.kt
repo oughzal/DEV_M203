@@ -1,20 +1,12 @@
 package com.example.m203
 
-import android.graphics.Color
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.m203.databinding.ActivityMainBinding
+import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CountryEventListener {
 
     lateinit var binding: ActivityMainBinding
     lateinit var countryAdapter: CountryAdapter
@@ -23,10 +15,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = CountryAdapter(countries)
+        val adapter = CountryAdapter(countries,this)
         binding.rvCountries.layoutManager = GridLayoutManager(this, 3)
         binding.rvCountries.adapter = adapter
 
+    }
+
+    override fun onFlagClicked(position: Int) {
+        val country = countries[position]
+        Snackbar.make(this,binding.root,"You clicked on ${country.name} flag",Snackbar.LENGTH_LONG).show()
     }
 
 

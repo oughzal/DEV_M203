@@ -9,12 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.m203.databinding.CountryItemBinding
 
 interface CountryEventListener {
     fun onFlagClicked(position: Int)
 }
 
-class CountryAdapter(private val itemList : List<Country>) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
+class CountryAdapter(private val itemList : List<Country>,val listener : CountryEventListener) : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -27,22 +28,25 @@ class CountryAdapter(private val itemList : List<Country>) : RecyclerView.Adapte
         holder: CountryViewHolder,
         position: Int
     ) {
-        val country = itemList[position]
-        holder.bind(country)
+
+        holder.bind(position)
     }
 
     override fun getItemCount(): Int = itemList.size
 
 
     inner class CountryViewHolder(itemView :View) : RecyclerView.ViewHolder(itemView){
-        val imageFlag = itemView.findViewById<ImageView>(R.id.imgFlag)
-        val name = itemView.findViewById<TextView>(R.id.countryName)
-        val capital = itemView.findViewById<TextView>(R.id.countryCapital)
+        val binding = CountryItemBinding.bind(itemView)
 
-        fun bind(country: Country) {
-            imageFlag.setImageResource(country.imageId)
-            name.text = country.name
-            capital.text = country.capital
+        fun bind(position: Int) {
+            val country = itemList[position]
+            binding.imgFlag.setImageResource(country.imageId)
+            binding.countryName.text = country.name
+            binding.countryCapital.text = country.capital
+            binding.imgFlag.setOnClickListener {
+                listener.onFlagClicked(position)
+            }
+
         }
 
     }
