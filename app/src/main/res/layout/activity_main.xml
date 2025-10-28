@@ -3,13 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:padding="45dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="45dp"
     tools:context=".MainActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/tvUserScore"
+            android:text="User : 0" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/tvComputerScore"
+            android:text="Computer : 0 "
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="250dp"
+        android:id="@+id/computerHand"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:rotation="-90"
+        android:scaleX="-1"
+        android:layout_weight="1"
+        android:src="@drawable/rock" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:id="@+id/userHand"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:rotation="90"
+        android:layout_weight="1"
+        android:src="@drawable/rock" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/paper"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/paper" />
+
+        <ImageView
+            android:id="@+id/scissors"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/scissors" />
+
+        <ImageView
+            android:id="@+id/rock"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+
+            android:layout_weight="1"
+            android:src="@drawable/rock" />
+
+    </LinearLayout>
 
 
 </LinearLayout>
