@@ -2,17 +2,10 @@ package com.example.m203
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.graphics.Color
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.m203.databinding.ActivityMainBinding
 import com.example.m203.databinding.DialogPersonBinding
 import com.google.android.material.snackbar.Snackbar
