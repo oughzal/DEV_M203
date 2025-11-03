@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="myTextView" parent="">
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#0000FF</item>
+    </style>
+
+    <style name="eff">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#AABBFF</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+</resources>

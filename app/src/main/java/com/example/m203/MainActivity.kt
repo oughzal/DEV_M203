@@ -12,6 +12,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val appname = this.getString(R.string.app_name)
+        val primaryColor = this.getColor(R.color.primaryColor)
+
 
     }
 }

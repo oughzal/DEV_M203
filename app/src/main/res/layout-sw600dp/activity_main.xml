@@ -12,15 +12,12 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/chat"
-        android:fontFamily="@font/digital"
-        android:textSize="50sp"
-        android:text="16:45" />
+        android:layout_height="wrap_content"
+
+        android:text="@string/devoam" />
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/circle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="Press Me" />
 
