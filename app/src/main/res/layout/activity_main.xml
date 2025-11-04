@@ -3,13 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:padding="45dp"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:orientation="vertical"
+    android:background="#FF0000"
+    android:padding="45dp"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imgAnim"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/ofppt" />
+
+    <Button
+        android:id="@+id/animate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Animate Me" />
+
+    <Button
+        android:id="@+id/objectAnimator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Animate Me" />
+    <Button
+        android:id="@+id/btnToActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="transition" />
 
 
 
