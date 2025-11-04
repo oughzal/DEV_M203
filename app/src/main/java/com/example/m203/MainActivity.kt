@@ -2,7 +2,10 @@ package com.example.m203
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.animation.AnimationUtils
 
 import androidx.appcompat.app.AppCompatActivity
@@ -48,5 +51,25 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+        binding.btnActivity2.setOnClickListener {
+
+            window.exitTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_left)
+            window.enterTransition = TransitionInflater.from(this).inflateTransition(android.R.transition.slide_right)
+            val intent = Intent(this, MainActivity2::class.java)
+//            overridePendingTransition(android.R.transition.slide_left, android.R.transition.slide_right)
+            val options = android.app.ActivityOptions.makeSceneTransitionAnimation(this)
+            startActivity(intent,options.toBundle())
+        }
+
+
+        binding.imgOFPPT.setOnClickListener {
+            val options = ActivityOptions.makeSceneTransitionAnimation(
+                this,binding.imgOFPPT,"logo"
+            )
+            val intent = Intent(this, MainActivity3::class.java)
+//            startActivity(intent,)
+            startActivity(intent,options.toBundle())
+        }
     }
 }

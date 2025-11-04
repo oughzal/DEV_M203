@@ -13,8 +13,8 @@
 
 <ImageView
     android:id="@+id/imgOFPPT"
-    android:layout_width="300dp"
-    android:layout_height="300dp"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
     android:layout_marginBottom="30dp"
     android:src="@drawable/ofppt" />
     <Button
@@ -27,6 +27,17 @@
         android:layout_height="wrap_content"
         android:text="ObjectAnimation"
         android:id="@+id/btnObjectAnimation"
+        android:layout_marginTop="20dp" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="go to Activity 2"
+        android:id="@+id/btnActivity2" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="go to Activity 3"
+        android:id="@+id/btnActivity3"
         android:layout_marginTop="20dp" />
 
 </LinearLayout>
