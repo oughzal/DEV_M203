@@ -11,6 +11,22 @@
     tools:context=".MainActivity">
 
 
-
+<ImageView
+    android:id="@+id/imgOFPPT"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_marginBottom="30dp"
+    android:src="@drawable/ofppt" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Animation"
+        android:id="@+id/btnViewAnimation" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ObjectAnimation"
+        android:id="@+id/btnObjectAnimation"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>
