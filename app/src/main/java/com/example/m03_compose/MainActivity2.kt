@@ -64,7 +64,10 @@ class MainActivity2 : ComponentActivity() {
 
 
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    showSystemUi = true
+)
 @Composable
 fun FirstSreen(){
 
