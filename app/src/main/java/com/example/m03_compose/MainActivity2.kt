@@ -12,11 +12,21 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AirportShuttle
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.Icon
+
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 
@@ -98,16 +108,54 @@ fun DicesScreen(){
         R.drawable.dice4,
         R.drawable.dice5,
         R.drawable.dice6)
+    var checked by rememberSaveable {
+        mutableStateOf(true)
+    }
+    var width by rememberSaveable {
+        mutableStateOf(0.5f)
+    }
     var i by rememberSaveable {
-        mutableStateOf(0)
+        mutableStateOf(5)
     }
     Spacer(modifier = Modifier.height(20.dp))
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Switch(
+            checked = checked,
+            onCheckedChange = { checked = it }
+        )
+        Text(
+            text = if(checked) "Visible" else "Invisible",
+            fontSize = 20.sp
+        )
+    }
+
+if(checked)
     Image(
         painter = painterResource(dices[i]),
         contentDescription = null,
         modifier = Modifier
             .clip(CircleShape)
+            .width((width*400).toInt().dp)
     )
+    Row(
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        dices.indices.forEach {
+            RadioButton(
+                selected = it== i,
+                onClick = {
+                    i = it
+                }
+            )
+            Text(
+                text = "${it+1}"
+            )
+        }
+    }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -128,5 +176,23 @@ fun DicesScreen(){
         ) {
             Text("Next")
         }
+    }
+    Slider(
+        value = width,
+        onValueChange = {
+            width = it
+        }
+    )
+    IconButton(
+        onClick = {
+
+        }
+    ) {
+        Icon(
+            imageVector = Icons.Default.AirportShuttle,
+            contentDescription = null,
+            tint = Color.Red,
+            modifier = Modifier.size(250.dp)
+        )
     }
 }
