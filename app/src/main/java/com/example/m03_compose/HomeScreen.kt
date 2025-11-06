@@ -20,6 +20,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -80,18 +81,21 @@ fun HomeBottomBar() {
         tonalElevation = 0.dp
     ) {
         NavigationBarItem(
-            selected = false,
+            selected = true,
             onClick = { /*TODO*/ },
             icon = {
                 Icon(
-                    imageVector = Icons.Outlined.Home,
-                    contentDescription = null
+                    imageVector = Icons.Filled.Home,
+                    contentDescription = null,
+                    tint = Color.Blue
                 )
             },
             label = {
                 Text(
                     text = "Home",
-                    fontSize = 10.sp
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.Blue
                 )
             }
         )
