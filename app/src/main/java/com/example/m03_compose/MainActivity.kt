@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.sp
 
 
 class MainActivity : ComponentActivity() {
@@ -68,7 +69,9 @@ fun MainScreen() {
                 .padding(it)
                 .fillMaxSize()
         ) {
-            Text(text = "Scaffold Example")
+            Text(text = "${coutryFlag("MA")}",
+                fontSize = 80.sp
+            )
         }
 
     }
