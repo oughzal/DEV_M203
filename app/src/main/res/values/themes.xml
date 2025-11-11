@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Theme.M03_compose" parent="android:Theme.Material.Light.NoActionBar" >
-
+    <item name="android:colorPrimary">#FF0000</item>
 
     </style>
 </resources>

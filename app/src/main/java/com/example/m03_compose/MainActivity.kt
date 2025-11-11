@@ -28,6 +28,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CameraAlt
 import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -213,6 +214,9 @@ fun TopAppBarScreen() {
     TopAppBar(
         title = { Text(text = "Whatsapp") },
         actions = {
+            Button(onClick = {}){
+                Text(text = "Test Button")
+            }
             IconButton(
                 onClick = {}
             ) {
