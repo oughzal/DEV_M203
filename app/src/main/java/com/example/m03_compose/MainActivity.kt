@@ -4,18 +4,30 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.CameraAlt
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Groups
 import androidx.compose.material.icons.outlined.MoreVert
-import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,13 +43,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.motionEventSpy
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -61,41 +80,125 @@ class MainActivity : ComponentActivity() {
 )
 @Composable
 fun MainScreen() {
+    var pagerState = rememberPagerState(pageCount = { 3 })
+    val scope = rememberCoroutineScope()
     Scaffold(
         topBar = { TopAppBarScreen() },
-        bottomBar = { BottomAppBarScreen(){ index ->
+        bottomBar = {
+            BottomAppBarScreen(pagerState) { index ->
+                scope.launch {
+                    pagerState.scrollToPage(index)
+                }
 
-        } },
-        content = { ContentScreen(it) }
+            }
+        },
+        content = { ContentScreen(pagerState, it) }
     )
 
 }
 
 @Composable
-fun ContentScreen(p: PaddingValues) {
+fun ContentScreen(pagerState: PagerState, padding: PaddingValues) {
 
+    HorizontalPager(
+        state = pagerState,
+        modifier = Modifier.padding(padding)
+    ) { page ->
+        when (page) {
+            0 -> ChatSreen()
+            1 -> StatusScreen()
+            2 -> CallScreen()
+        }
+
+    }
 }
 
 @Composable
-fun BottomAppBarScreen( onClick: (Int) -> Unit ={}) {
+fun CallScreen() {
+    Text(
+        textAlign = TextAlign.Center,
+        text = "Call Screen",
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+    )
+}
+
+@Composable
+fun StatusScreen() {
+    Text(
+        textAlign = TextAlign.Center,
+        text = "Status Screen",
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+    )
+}
+
+@Composable
+fun ChatSreen() {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(conversations){
+            ConversationItem(conversation = it)
+        }
+    }
+}
+
+@Composable
+fun ConversationItem(conversation: Conversation) {
+    Row(
+        modifier = Modifier.clickable( onClick = {  })
+    ) {
+        Image(
+            painter = painterResource(conversation.profilImage),
+            contentDescription = null,
+            modifier = Modifier
+                .width(80.dp)
+                .aspectRatio(1f)
+                .clip(CircleShape)
+                .border(BorderStroke(width = 3.dp, color = Color.Green), shape = CircleShape)
+        )
+        Column(
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .padding(8.dp)
+        ) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = conversation.name,
+                    modifier = Modifier.weight(1f),
+                    fontWeight = FontWeight.Bold
+                )
+                Text(text = conversation.time)
+            }
+            Text(text = conversation.lastMessage)
+        }
+    }
+}
+
+@Composable
+fun BottomAppBarScreen(pagerState: PagerState,onClick: (Int) -> Unit = {}) {
     NavigationBar {
         navigationBarItems.forEachIndexed { i, item ->
+            val selected = pagerState.currentPage == i
             NavigationBarItem(
-                selected = item.selected,
+                selected = selected,
                 label = {
                     Text(
                         text = item.title,
-                        fontWeight = if(item.selected) FontWeight.Bold else FontWeight.Normal,
-                        color = if(item.selected) Color.Black else Color.Gray
+                        fontWeight = if (selected) FontWeight.Bold else FontWeight.Normal,
+                        color = if (selected) Color.Black else Color.Gray
 
                     )
                 },
                 onClick = { onClick(i) },
                 icon = {
                     Icon(
-                        imageVector = if (item.selected) item.selectedIcon else item.icon,
+                        imageVector = if (selected) item.selectedIcon else item.icon,
                         contentDescription = null,
-                        tint = if(item.selected) Color.Black else Color.Gray
+                        tint = if (selected) Color.Black else Color.Gray
                     )
                 }
             )
