@@ -52,6 +52,7 @@ import java.nio.file.WatchEvent
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
@@ -106,13 +107,15 @@ fun DatePickerField() {
             .padding(horizontal = 10.dp)
     ) {
         val selectedDate = dateState.getSelectedDate() ?: LocalDate.now()
-        val value = "%02d/%02d/%04d".format(
+        val value = "%02d/%02d/%04d %.2f %s".format(
             selectedDate.dayOfMonth,
             selectedDate.monthValue,
             selectedDate.year
         )
+        val seletedDateFormated = DateTimeFormatter.ofPattern("dd/MM/yyyy").format(selectedDate)
         OutlinedTextField(
-            value = value,
+            value = seletedDateFormated,
+            readOnly = true,
             onValueChange = {},
             trailingIcon = {
                 IconButton(onClick = { openDialog = !openDialog }) {
