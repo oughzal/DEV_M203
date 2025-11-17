@@ -23,6 +23,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.toRoute
+import kotlinx.serialization.Serializable
 
 
 class MainActivity : ComponentActivity() {
@@ -39,6 +41,20 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
+@Serializable
+data class Screen1(val person: Person)
+@Serializable
+object Screen2
+
+@Serializable
+data class Home(val id: String ="0", val nom : String)
+
+@Serializable
+data class  Person(val id:Int,val nom : String,val age : Int)
+
+
+
 @Preview(
     showBackground = true,
     showSystemUi = true,
@@ -50,25 +66,17 @@ fun NavScreen() {
 
     NavHost (
         navController = navController,
-        startDestination = "home/0"
+        startDestination = Home("0","DEVOAM")
     ){
-        composable(
-            route ="home/{id}",
-            arguments = listOf(
-                navArgument("id"){
-                    defaultValue = "0"
-                    nullable = true
-                    type = NavType.StringType
-                }
-            )
-        ){
-            val id : String = it.arguments?.getString("id") ?: "0"
-            HomeScreen(navController,id=id )
+        composable<Screen1>{
+            val screen1 : Screen1 = it.toRoute()
+            Screen1(navController, screen1.person )
         }
-        composable("screen1"){
-            Screen1(navController)
+        composable<Home>{
+            val home : Home = it.toRoute() // = Home("12345",nom="DEVOAM")
+            HomeScreen(navController, home.id, home.nom)
         }
-        composable("screen2"){
+        composable<Screen2>{
             Screen2(navController)
         }
 
@@ -78,7 +86,7 @@ fun NavScreen() {
 
 
 @Composable
-fun HomeScreen(navController: NavController, id: String?) {
+fun HomeScreen(navController: NavController, id: String?,nom : String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -91,7 +99,7 @@ fun HomeScreen(navController: NavController, id: String?) {
         )
         Button(onClick ={
             navController.popBackStack()
-            navController.navigate("screen1")
+            navController.navigate(Screen1)
 
         } ) {
             Text("To Screen 1")
@@ -99,7 +107,7 @@ fun HomeScreen(navController: NavController, id: String?) {
     }
 }
 @Composable
-fun Screen1(navController: NavController) {
+fun Screen1(navController: NavController, p : Person) {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
@@ -111,7 +119,7 @@ fun Screen1(navController: NavController) {
             fontWeight = FontWeight.Bold
         )
         Button(onClick ={
-            navController.navigate("screen2")
+            navController.navigate(Screen2)
         } ) {
             Text("To Screen 2")
         }
@@ -130,7 +138,8 @@ fun Screen2(navController: NavController) {
             fontWeight = FontWeight.Bold
         )
         Button(onClick ={
-            navController.navigate("home/1234")
+            val route = Home("12345",nom="DEVOAM")
+            navController.navigate(route)
         } ) {
             Text("To Home")
         }
