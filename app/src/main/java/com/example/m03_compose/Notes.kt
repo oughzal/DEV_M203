@@ -12,6 +12,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CardElevation
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -56,8 +59,8 @@ val notes = mutableListOf<Note>(
 fun NoteListScreen(navController: NavController){
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(20.dp),
-        modifier = Modifier.fillMaxSize().padding(vertical = 80.dp, horizontal = 16.dp)
+        verticalArrangement = Arrangement.spacedBy(6.dp),
+        modifier = Modifier.fillMaxSize().padding(vertical = 80.dp, horizontal = 6.dp)
     ) {
         itemsIndexed(notes){i , note ->
             NoteCard(navController,note = note, index = i)
@@ -67,15 +70,20 @@ fun NoteListScreen(navController: NavController){
 
 @Composable
 fun NoteCard(navController: NavController,note: Note, index: Int) {
-    Card(
+    OutlinedCard(
+        elevation = CardDefaults.outlinedCardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.outlinedCardColors().copy(
+            containerColor = Color(note.color)
+        ),
         modifier = Modifier
-            .padding(6.dp)
             .fillMaxWidth()
             .clickable{
                 navController.navigate(NoteRoute(index))
             }
     ){
-        Column {
+        Column(modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()) {
             Text(
                 text=note.title,
                 fontWeight = FontWeight.Bold,
@@ -115,7 +123,9 @@ fun Navigation(){
 
 @Composable
 fun NoteScreen(navController: NavController,index : Int) {
-    val note : Note = notes[index].copy()
+    val note : Note = notes[index].copy(
+        title = "DEVOAM"
+    )
     note.title = "DEVOAM"
     Column(
         modifier = Modifier
@@ -135,6 +145,7 @@ fun NoteScreen(navController: NavController,index : Int) {
         )
         Button(onClick = {
             notes[index] = note
+            navController.popBackStack()
         }) { Text("Save") }
     }
 }
